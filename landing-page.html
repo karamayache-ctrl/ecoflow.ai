@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoCompliance AI - Pegada de Carbono Simplificada para PMEs</title>
+    <meta name="description" content="Calcule a pegada de carbono da sua empresa em minutos. Relatórios profissionais de ESG por apenas R$ 97. Ideal para PMEs brasileiras.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #2d5a27 0%, #4a7c59 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            color: #7dd3fc;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #7dd3fc;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(5, 150, 105, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #10b981 100%);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%"><stop offset="0%" stop-color="%23ffffff" stop-opacity="0.1"/><stop offset="100%" stop-color="%23ffffff" stop-opacity="0"/></radialGradient></defs><circle cx="200" cy="200" r="100" fill="url(%23a)"/><circle cx="800" cy="300" r="150" fill="url(%23a)"/><circle cx="400" cy="700" r="120" fill="url(%23a)"/></svg>');
+            opacity: 0.1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero .subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .primary-cta {
+            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .primary-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(5, 150, 105, 0.4);
+        }
+
+        .secondary-cta {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 1rem 2rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .secondary-cta:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .trust-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            opacity: 0.8;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        /* Problem Section */
+        .problem {
+            padding: 80px 0;
+            background: #f8fafc;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: #64748b;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .problem-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .problem-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ef4444 0%, #f97316 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .problem-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+
+        .problem-card p {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        /* Solution Section */
+        .solution {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .solution-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .solution-text h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 1.5rem;
+        }
+
+        .solution-text p {
+            font-size: 1.1rem;
+            color: #64748b;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .features-list li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .features-list i {
+            color: #10b981;
+            font-size: 1.2rem;
+        }
+
+        .solution-visual {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .calculator-preview {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .calculator-preview h4 {
+            color: #1e293b;
+            margin-bottom: 1rem;
+        }
+
+        .input-group {
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .result-preview {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-top: 1rem;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 80px 0;
+            background: #f8fafc;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+
+        .price-subtitle {
+            color: #64748b;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            color: #374151;
+        }
+
+        .pricing-features i {
+            color: #10b981;
+        }
+
+        /* CTA Section */
+        .final-cta {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .final-cta p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .urgency {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 12px;
+            padding: 1rem;
+            margin: 2rem auto;
+            max-width: 500px;
+            color: #fca5a5;
+        }
+
+        /* Footer */
+        footer {
+            background: #1e293b;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .solution-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .trust-indicators {
+                gap: 1rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* Form Styles */
+        .form-container {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            margin-top: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #10b981;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <i class="fas fa-leaf"></i>
+                EcoCompliance AI
+            </div>
+            <ul class="nav-links">
+                <li><a href="#problema">Problema</a></li>
+                <li><a href="#solucao">Solução</a></li>
+                <li><a href="#preco">Preço</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+            <a href="#calculadora" class="cta-button">Calcular Agora</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content fade-in-up">
+                <h1>Pegada de Carbono Simplificada para PMEs</h1>
+                <p class="subtitle">
+                    Calcule as emissões da sua empresa em minutos e receba um relatório profissional de ESG. 
+                    Ideal para PMEs que precisam de compliance sustentável sem complicação.
+                </p>
+                <div class="hero-cta">
+                    <a href="#calculadora" class="primary-cta">
+                        <i class="fas fa-calculator"></i>
+                        Calcular Pegada de Carbono
+                    </a>
+                    <a href="#solucao" class="secondary-cta">
+                        Como Funciona
+                    </a>
+                </div>
+                <div class="trust-indicators">
+                    <div class="trust-item">
+                        <i class="fas fa-shield-alt"></i>
+                        Dados Seguros
+                    </div>
+                    <div class="trust-item">
+                        <i class="fas fa-clock"></i>
+                        Resultado em 5 min
+                    </div>
+                    <div class="trust-item">
+                        <i class="fas fa-certificate"></i>
+                        Relatório Profissional
+                    </div>
+                    <div class="trust-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        Fatores Brasil
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section id="problema" class="problem">
+        <div class="container">
+            <div class="section-header">
+                <h2>Por que sua PME precisa medir a pegada de carbono?</h2>
+                <p>Grandes clientes e bancos estão exigindo relatórios ESG. Não fique para trás.</p>
+            </div>
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div class="problem-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>Clientes Exigem ESG</h3>
+                    <p>Grandes empresas só trabalham com fornecedores que comprovam sustentabilidade. Sem relatório ESG, você perde contratos.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <h3>Bancos Pedem Compliance</h3>
+                    <p>Crédito verde e financiamentos sustentáveis exigem comprovação de práticas ambientais. Sem dados, sem crédito.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <h3>Regulamentação Chegando</h3>
+                    <p>A Taxonomia Verde do Brasil tornará o reporting ESG obrigatório. Prepare-se antes que seja tarde.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section id="solucao" class="solution">
+        <div class="container">
+            <div class="solution-content">
+                <div class="solution-text">
+                    <h2>A solução mais simples do mercado</h2>
+                    <p>
+                        Esqueça consultores caros e planilhas complicadas. Com o EcoCompliance AI, 
+                        você calcula a pegada de carbono da sua empresa em minutos e recebe um 
+                        relatório profissional pronto para apresentar a clientes e bancos.
+                    </p>
+                    <ul class="features-list">
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            Fatores de emissão específicos do Brasil
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            Cálculo automático de Escopo 1, 2 e 3
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            Relatório PDF profissional
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            Recomendações de redução de emissões
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            Comparação com empresas do seu setor
+                        </li>
+                    </ul>
+                    <a href="#calculadora" class="primary-cta">
+                        Testar Agora Grátis
+                    </a>
+                </div>
+                <div class="solution-visual">
+                    <div class="calculator-preview">
+                        <h4>Calculadora Inteligente</h4>
+                        <div class="input-group">
+                            <label>Consumo de energia (kWh/mês)</label>
+                            <input type="number" placeholder="Ex: 2500" readonly>
+                        </div>
+                        <div class="input-group">
+                            <label>Combustível (litros/mês)</label>
+                            <input type="number" placeholder="Ex: 800" readonly>
+                        </div>
+                        <div class="result-preview">
+                            <strong>Sua pegada: 2.4 tCO2e/mês</strong><br>
+                            <small>Relatório completo em PDF</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section id="calculadora" class="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2>Calcule sua pegada de carbono agora</h2>
+                <p>Preencha os dados básicos e receba seu relatório profissional</p>
+            </div>
+            
+            <div class="form-container">
+                <form id="carbonForm">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                        <div class="form-group">
+                            <label for="empresa">Nome da Empresa *</label>
+                            <input type="text" id="empresa" name="empresa" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="setor">Setor de Atividade *</label>
+                            <select id="setor" name="setor" required>
+                                <option value="">Selecione o setor</option>
+                                <option value="comercio">Comércio</option>
+                                <option value="servicos">Serviços</option>
+                                <option value="industria">Indústria</option>
+                                <option value="construcao">Construção</option>
+                                <option value="tecnologia">Tecnologia</option>
+                                <option value="outros">Outros</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="funcionarios">Número de Funcionários *</label>
+                            <input type="number" id="funcionarios" name="funcionarios" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="energia">Consumo de Energia (kWh/mês) *</label>
+                            <input type="number" id="energia" name="energia" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="combustivel">Combustível (litros/mês)</label>
+                            <input type="number" id="combustivel" name="combustivel" placeholder="Gasolina, diesel, etc.">
+                        </div>
+                        <div class="form-group">
+                            <label for="gas">Gás (m³/mês)</label>
+                            <input type="number" id="gas" name="gas" placeholder="GLP, gás natural">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email para receber o relatório *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefone">Telefone *</label>
+                            <input type="tel" id="telefone" name="telefone" required>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-calculator"></i>
+                        Calcular Pegada de Carbono - R$ 97
+                    </button>
+                    
+                    <p style="text-align: center; margin-top: 1rem; color: #64748b; font-size: 0.9rem;">
+                        Pagamento seguro via PIX ou cartão. Relatório entregue em até 24h.
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="preco" class="pricing" style="background: white;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Preço justo para PMEs</h2>
+                <p>Sem mensalidades. Pague apenas quando precisar do relatório.</p>
+            </div>
+            
+            <div class="pricing-card">
+                <div class="price">R$ 97</div>
+                <p class="price-subtitle">Por relatório completo</p>
+                
+                <ul class="pricing-features">
+                    <li>
+                        <i class="fas fa-check"></i>
+                        Cálculo completo de pegada de carbono
+                    </li>
+                    <li>
+                        <i class="fas fa-check"></i>
+                        Relatório PDF profissional
+                    </li>
+                    <li>
+                        <i class="fas fa-check"></i>
+                        Fatores de emissão do Brasil
+                    </li>
+                    <li>
+                        <i class="fas fa-check"></i>
+                        Recomendações personalizadas
+                    </li>
+                    <li>
+                        <i class="fas fa-check"></i>
+                        Comparação setorial
+                    </li>
+                    <li>
+                        <i class="fas fa-check"></i>
+                        Suporte por WhatsApp
+                    </li>
+                    <li>
+                        <i class="fas fa-check"></i>
+                        Entrega em até 24h
+                    </li>
+                </ul>
+                
+                <a href="#calculadora" class="primary-cta" style="width: 100%; justify-content: center;">
+                    Solicitar Relatório
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <div class="container">
+            <h2>Não perca mais contratos por falta de ESG</h2>
+            <p>Seus concorrentes já estão se preparando. Seja o primeiro no seu setor.</p>
+            
+            <div class="urgency">
+                <i class="fas fa-clock"></i>
+                <strong>Oferta de lançamento:</strong> Primeiros 100 relatórios por R$ 97 (valor normal R$ 197)
+            </div>
+            
+            <a href="#calculadora" class="primary-cta" style="font-size: 1.2rem; padding: 1.2rem 2.5rem;">
+                <i class="fas fa-rocket"></i>
+                Garantir Meu Relatório Agora
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contato">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+                <div>
+                    <div class="logo" style="margin-bottom: 1rem;">
+                        <i class="fas fa-leaf"></i>
+                        EcoCompliance AI
+                    </div>
+                    <p>Simplificando o ESG para PMEs brasileiras</p>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 1rem;">Contato</h4>
+                    <p><i class="fas fa-envelope"></i> contato@ecocompliance.ai</p>
+                    <p><i class="fas fa-phone"></i> (11) 99999-9999</p>
+                    <p><i class="fas fa-map-marker-alt"></i> São Paulo, SP</p>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 1rem;">Links Úteis</h4>
+                    <p><a href="#" style="color: #7dd3fc;">Como funciona</a></p>
+                    <p><a href="#" style="color: #7dd3fc;">Perguntas frequentes</a></p>
+                    <p><a href="#" style="color: #7dd3fc;">Política de privacidade</a></p>
+                </div>
+            </div>
+            <div style="text-align: center; padding-top: 2rem; border-top: 1px solid #334155;">
+                <p>&copy; 2025 EcoCompliance AI. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission
+        document.getElementById('carbonForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Collect form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Simple validation
+            if (!data.empresa || !data.setor || !data.funcionarios || !data.energia || !data.email || !data.telefone) {
+                alert('Por favor, preencha todos os campos obrigatórios.');
+                return;
+            }
+            
+            // Calculate basic carbon footprint (simplified)
+            const energia = parseFloat(data.energia) || 0;
+            const combustivel = parseFloat(data.combustivel) || 0;
+            const gas = parseFloat(data.gas) || 0;
+            
+            // Brazilian emission factors (simplified)
+            const fatorEnergia = 0.0817; // tCO2e/MWh (SIN 2024)
+            const fatorCombustivel = 2.31; // tCO2e/1000L gasolina
+            const fatorGas = 1.95; // tCO2e/1000m³
+            
+            const emissaoEnergia = (energia / 1000) * fatorEnergia;
+            const emissaoCombustivel = (combustivel / 1000) * fatorCombustivel;
+            const emissaoGas = (gas / 1000) * fatorGas;
+            
+            const totalEmissoes = emissaoEnergia + emissaoCombustivel + emissaoGas;
+            
+            // Show result and redirect to payment
+            alert(`Cálculo preliminar concluído!\n\nSua pegada de carbono estimada: ${totalEmissoes.toFixed(2)} tCO2e/mês\n\nVocê será redirecionado para o pagamento. Após a confirmação, enviaremos o relatório completo em até 24h.`);
+            
+            // Here you would integrate with a payment processor
+            // For now, just show a success message
+            setTimeout(() => {
+                alert('Obrigado! Você receberá as instruções de pagamento por email em instantes.');
+            }, 1000);
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-up');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
+
